@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Media Folders
+test_imgs/
+
 # C extensions
 *.so
 
