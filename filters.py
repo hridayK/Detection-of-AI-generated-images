@@ -24,7 +24,7 @@ def apply_filter_a(src:np.ndarray):
     for filter in f1[1:]:
         img = cv2.add(img,cv2.filter2D(src=src_copy, kernel=filter, ddepth=-1))
 
-    return img
+    return img//8
 
 def apply_filter_b(src:np.ndarray):
     src_copy = np.copy(src)
@@ -33,30 +33,29 @@ def apply_filter_b(src:np.ndarray):
                     [ 0,  0, -3,  0,  0],
                     [ 0,  0,  1,  0,  0],
                     [ 0,  0,  0,  0,  0]]
-    # removed the noise adding kernel
-    # f2 = np.asarray([
-    #     rotate(input=base_filter,angle=45,reshape=False),
-    #     base_filter,
-    #     rotate(input=base_filter,angle=-45,reshape=False),
-    #     rotate(input=base_filter,angle=-90,reshape=False),
-    #     rotate(input=base_filter,angle=-135,reshape=False),
-    #     rotate(input=base_filter,angle=180,reshape=False),
-    #     rotate(input=base_filter,angle=135,reshape=False),
-    #     rotate(input=base_filter,angle=90,reshape=False)
-    # ])
     f2 = np.asarray([
+        rotate(input=base_filter,angle=45,reshape=False),
         base_filter,
+        rotate(input=base_filter,angle=-45,reshape=False),
         rotate(input=base_filter,angle=-90,reshape=False),
+        rotate(input=base_filter,angle=-135,reshape=False),
         rotate(input=base_filter,angle=180,reshape=False),
+        rotate(input=base_filter,angle=135,reshape=False),
         rotate(input=base_filter,angle=90,reshape=False)
     ])
+    # f2 = np.asarray([
+    #     base_filter,
+    #     rotate(input=base_filter,angle=-90,reshape=False),
+    #     rotate(input=base_filter,angle=180,reshape=False),
+    #     rotate(input=base_filter,angle=90,reshape=False)
+    # ])
                     
     
     img = cv2.filter2D(src=src_copy, kernel=f2[0], ddepth=-1)
     for filter in f2[1:]:
         img = cv2.add(img,cv2.filter2D(src=src_copy, kernel=filter, ddepth=-1))
 
-    return img
+    return img//8
 
 
 
@@ -78,7 +77,7 @@ def apply_filter_c(src:np.ndarray):
     for filter in f3[1:]:
         img = cv2.add(img,cv2.filter2D(src=src_copy, kernel=filter, ddepth=-1))
 
-    return img
+    return img//4
 
 
 def apply_filter_d(src:np.ndarray):
@@ -99,7 +98,7 @@ def apply_filter_d(src:np.ndarray):
     for filter in f4[1:]:
         img = cv2.add(img,cv2.filter2D(src=src_copy, kernel=filter, ddepth=-1))
 
-    return img
+    return img//4
 
 def apply_filter_e(src:np.ndarray):
     src_copy=np.copy(src)
@@ -120,7 +119,7 @@ def apply_filter_e(src:np.ndarray):
     for filter in f5[1:]:
         img=cv2.add(img,cv2.filter2D(src=src_copy, kernel=filter, ddepth=-1))
 
-    return img
+    return img//4
 
 def apply_filter_f(src:np.ndarray):
     src_copy=np.copy(src)
@@ -147,7 +146,9 @@ def apply_filter_g(src:np.ndarray):
 
 def apply_all_filters(src:np.ndarray):
     src_copy = np.copy(src)
-    # return apply_filter_a(src_copy) + apply_filter_b(src_copy) + apply_filter_c(src_copy) + \
-    # apply_filter_d(src_copy) + apply_filter_e(src_copy) + apply_filter_f(src_copy)
-    return apply_filter_a(src_copy) + apply_filter_b(src_copy) + apply_filter_c(src_copy) + \
-    apply_filter_d(src_copy) + apply_filter_f(src_copy)
+    # if(gray_scale==False):
+    #     return (apply_filter_a(src_copy) + apply_filter_b(src_copy) + apply_filter_c(src_copy) + \
+    #             apply_filter_d(src_copy) + apply_filter_e(src_copy) + apply_filter_f(src_copy))//8
+    # else:
+    return np.array(cv2.cvtColor((apply_filter_a(src_copy) + apply_filter_b(src_copy) + apply_filter_c(src_copy) + \
+            apply_filter_d(src_copy) + apply_filter_e(src_copy) + apply_filter_f(src_copy))//8, cv2.COLOR_RGB2GRAY)).astype(np.int32)
