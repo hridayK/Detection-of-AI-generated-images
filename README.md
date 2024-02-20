@@ -23,3 +23,8 @@ An attempt to detect AI generated images in a generalized manner.
 - The standard matrix rotation function of ```scipy.ndimage.rotate``` uses affine transformation to rotate a matrix while there are more ways to rotate a matrix, attempt to explore methods to avoid noisy outputs after applying filters.
 
 - **Result** - The way of rotation wasn't a problem but the way to merge filters was causing noisy outputs
+
+**Update: 20/02/2024**
+- Implement data pipeline.
+- Trained for till: ```loss: 0.1729 - binary_accuracy: 0.924```
+- saved model as ```classifier.h5```
