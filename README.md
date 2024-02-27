@@ -4,13 +4,11 @@ Reference paper - [link](https://arxiv.org/abs/2311.12397)
 Dataset Link - [link](https://www.kaggle.com/datasets/ravidussilva/real-ai-art)
 
 An attempt to detect AI generated images in a generalized manner.
- ## Progress:
- - Extracted rich and poor texture images (refer to ```patch_generator.py```)
- - Implement filter passing mechanism (refer to ```filters.py```)
- - No. of relevant feature identified: 1
 
  ## ToDo:
- - Find the optimal way to rotate kernels to avoid noisy output (in order to change )
+ - Train model on more images
+ - improve datapipline
+ - make preprocessing more memory efficient
 
 ----------------------------------------------------------
 
@@ -28,3 +26,7 @@ An attempt to detect AI generated images in a generalized manner.
 - Implement data pipeline.
 - Trained for till: ```loss: 0.1729 - binary_accuracy: 0.924```
 - saved model as ```classifier.h5```
+
+**Update: 21/02/2024**
+- implement testing notebook
+
