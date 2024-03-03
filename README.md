@@ -5,13 +5,6 @@ Dataset Link - [link](https://www.kaggle.com/datasets/ravidussilva/real-ai-art)
 
 An attempt to detect AI generated images in a generalized manner.
 
- ## ToDo:
- - Train model on more images
- - improve datapipline
- - make preprocessing more memory efficient
-
-----------------------------------------------------------
-
 # Logs:
 **Update: 17/02/2024**
 - Removed noise adding filters.
