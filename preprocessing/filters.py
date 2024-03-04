@@ -4,21 +4,68 @@ from scipy.ndimage import rotate
 
 def apply_filter_a(src:np.ndarray):
     src_copy = np.copy(src)
-    base_filter = [[ 0,  0,  0,  0,  0],
-                    [ 0,  0,  1,  0,  0],
-                    [ 0,  0, -1,  0,  0],
-                    [ 0,  0,  0,  0,  0],
-                    [ 0,  0,  0,  0,  0]]
-    f1 = np.asarray([
-        rotate(input=base_filter,angle=45,reshape=False),
-        base_filter,
-        rotate(input=base_filter,angle=-45,reshape=False),
-        rotate(input=base_filter,angle=-90,reshape=False),
-        rotate(input=base_filter,angle=-135,reshape=False),
-        rotate(input=base_filter,angle=180,reshape=False),
-        rotate(input=base_filter,angle=135,reshape=False),
-        rotate(input=base_filter,angle=90,reshape=False),
-    ])
+    # base_filter = [[ 0,  0,  0,  0,  0],
+    #                 [ 0,  0,  1,  0,  0],
+    #                 [ 0,  0, -1,  0,  0],
+    #                 [ 0,  0,  0,  0,  0],
+    #                 [ 0,  0,  0,  0,  0]]
+    # f1 = np.asarray([
+    #     rotate(input=base_filter,angle=45,reshape=False),
+    #     base_filter,
+    #     rotate(input=base_filter,angle=-45,reshape=False),
+    #     rotate(input=base_filter,angle=-90,reshape=False),
+    #     rotate(input=base_filter,angle=-135,reshape=False),
+    #     rotate(input=base_filter,angle=180,reshape=False),
+    #     rotate(input=base_filter,angle=135,reshape=False),
+    #     rotate(input=base_filter,angle=90,reshape=False),
+    # ])
+    f1 = np.array([[[ 0,  0,  0,  0,  0],
+        [ 0,  1,  0,  0,  0],
+        [ 0,  0, -1,  0,  0],
+        [ 0,  0,  0,  0,  0],
+        [ 0,  0,  0,  0,  0]],
+
+       [[ 0,  0,  0,  0,  0],
+        [ 0,  0,  1,  0,  0],
+        [ 0,  0, -1,  0,  0],
+        [ 0,  0,  0,  0,  0],
+        [ 0,  0,  0,  0,  0]],
+
+       [[ 0,  0,  0,  0,  0],
+        [ 0,  0,  0,  1,  0],
+        [ 0,  0, -1,  0,  0],
+        [ 0,  0,  0,  0,  0],
+        [ 0,  0,  0,  0,  0]],
+
+       [[ 0,  0,  0,  0,  0],
+        [ 0,  0,  0,  0,  0],
+        [ 0,  0, -1,  1,  0],
+        [ 0,  0,  0,  0,  0],
+        [ 0,  0,  0,  0,  0]],
+
+       [[ 0,  0,  0,  0,  0],
+        [ 0,  0,  0,  0,  0],
+        [ 0,  0, -1,  0,  0],
+        [ 0,  0,  0,  1,  0],
+        [ 0,  0,  0,  0,  0]],
+
+       [[ 0,  0,  0,  0,  0],
+        [ 0,  0,  0,  0,  0],
+        [ 0,  0, -1,  0,  0],
+        [ 0,  0,  1,  0,  0],
+        [ 0,  0,  0,  0,  0]],
+
+       [[ 0,  0,  0,  0,  0],
+        [ 0,  0,  0,  0,  0],
+        [ 0,  0, -1,  0,  0],
+        [ 0,  1,  0,  0,  0],
+        [ 0,  0,  0,  0,  0]],
+
+       [[ 0,  0,  0,  0,  0],
+        [ 0,  0,  0,  0,  0],
+        [ 0,  1, -1,  0,  0],
+        [ 0,  0,  0,  0,  0],
+        [ 0,  0,  0,  0,  0]]])
     
     img = cv2.filter2D(src=src_copy, kernel=f1[0], ddepth=-1)
     for filter in f1[1:]:
@@ -28,29 +75,70 @@ def apply_filter_a(src:np.ndarray):
 
 def apply_filter_b(src:np.ndarray):
     src_copy = np.copy(src)
-    base_filter = [[ 0,  0, -1,  0,  0],
+    # base_filter = [[ 0,  0, -1,  0,  0],
+    #                 [ 0,  0,  3,  0,  0],
+    #                 [ 0,  0, -3,  0,  0],
+    #                 [ 0,  0,  1,  0,  0],
+    #                 [ 0,  0,  0,  0,  0]]
+    # f2 = np.asarray([
+    #     rotate(input=base_filter,angle=45,reshape=False),
+    #     base_filter,
+    #     rotate(input=base_filter,angle=-45,reshape=False),
+    #     rotate(input=base_filter,angle=-90,reshape=False),
+    #     rotate(input=base_filter,angle=-135,reshape=False),
+    #     rotate(input=base_filter,angle=180,reshape=False),
+    #     rotate(input=base_filter,angle=135,reshape=False),
+    #     rotate(input=base_filter,angle=90,reshape=False)
+    # ])              
+    
+    f2 = np.array([[[ 0,  0,  0,  0,  0],
+                    [ 0,  2,  1,  0,  0],
+                    [ 0,  1, -3,  0,  0],
+                    [ 0,  0,  0,  1,  0],
+                    [ 0,  0,  0,  0,  0]],
+
+                    [[ 0,  0, -1,  0,  0],
                     [ 0,  0,  3,  0,  0],
                     [ 0,  0, -3,  0,  0],
                     [ 0,  0,  1,  0,  0],
-                    [ 0,  0,  0,  0,  0]]
-    f2 = np.asarray([
-        rotate(input=base_filter,angle=45,reshape=False),
-        base_filter,
-        rotate(input=base_filter,angle=-45,reshape=False),
-        rotate(input=base_filter,angle=-90,reshape=False),
-        rotate(input=base_filter,angle=-135,reshape=False),
-        rotate(input=base_filter,angle=180,reshape=False),
-        rotate(input=base_filter,angle=135,reshape=False),
-        rotate(input=base_filter,angle=90,reshape=False)
-    ])
-    # f2 = np.asarray([
-    #     base_filter,
-    #     rotate(input=base_filter,angle=-90,reshape=False),
-    #     rotate(input=base_filter,angle=180,reshape=False),
-    #     rotate(input=base_filter,angle=90,reshape=False)
-    # ])
-                    
-    
+                    [ 0,  0,  0,  0,  0]],
+
+                    [[ 0,  0,  0,  0,  0],
+                    [ 0,  0,  1,  2,  0],
+                    [ 0,  0, -3,  1,  0],
+                    [ 0,  1,  0,  0,  0],
+                    [ 0,  0,  0,  0,  0]],
+
+                    [[ 0,  0,  0,  0,  0],
+                    [ 0,  0,  0,  0,  0],
+                    [ 0,  1, -3,  3, -1],
+                    [ 0,  0,  0,  0,  0],
+                    [ 0,  0,  0,  0,  0]],
+
+                    [[ 0,  0,  0,  0,  0],
+                    [ 0,  1,  0,  0,  0],
+                    [ 0,  0, -3,  1,  0],
+                    [ 0,  0,  1,  2,  0],
+                    [ 0,  0,  0,  0,  0]],
+
+                    [[ 0,  0,  0,  0,  0],
+                    [ 0,  0,  1,  0,  0],
+                    [ 0,  0, -3,  0,  0],
+                    [ 0,  0,  3,  0,  0],
+                    [ 0,  0, -1,  0,  0]],
+
+                    [[ 0,  0,  0,  0,  0],
+                    [ 0,  0,  0,  1,  0],
+                    [ 0,  1, -3,  0,  0],
+                    [ 0,  2,  1,  0,  0],
+                    [ 0,  0,  0,  0,  0]],
+
+                    [[ 0,  0,  0,  0,  0],
+                    [ 0,  0,  0,  0,  0],
+                    [-1,  3, -3,  1,  0],
+                    [ 0,  0,  0,  0,  0],
+                    [ 0,  0,  0,  0,  0]]])
+
     img = cv2.filter2D(src=src_copy, kernel=f2[0], ddepth=-1)
     for filter in f2[1:]:
         img = cv2.add(img,cv2.filter2D(src=src_copy, kernel=filter, ddepth=-1))
@@ -61,17 +149,40 @@ def apply_filter_b(src:np.ndarray):
 
 def apply_filter_c(src:np.ndarray):
     src_copy=np.copy(src)
-    base_filter = [[ 0,  0,  0,  0,  0],
+    # base_filter = [[ 0,  0,  0,  0,  0],
+    #                 [ 0,  0,  1,  0,  0],
+    #                 [ 0,  0, -2,  0,  0],
+    #                 [ 0,  0,  1,  0,  0],
+    #                 [ 0,  0,  0,  0,  0]]
+    # f3 = np.asarray([
+    #     base_filter,
+    #     rotate(input=base_filter,angle=-90,reshape=False),
+    #     rotate(input=base_filter,angle=45,reshape=False),
+    #     rotate(input=base_filter,angle=-45,reshape=False)
+    # ])
+    f3 = np.array([[[ 0,  0,  0,  0,  0],
                     [ 0,  0,  1,  0,  0],
                     [ 0,  0, -2,  0,  0],
                     [ 0,  0,  1,  0,  0],
-                    [ 0,  0,  0,  0,  0]]
-    f3 = np.asarray([
-        base_filter,
-        rotate(input=base_filter,angle=-90,reshape=False),
-        rotate(input=base_filter,angle=45,reshape=False),
-        rotate(input=base_filter,angle=-45,reshape=False)
-    ])
+                    [ 0,  0,  0,  0,  0]],
+
+                    [[ 0,  0,  0,  0,  0],
+                    [ 0,  0,  0,  0,  0],
+                    [ 0,  1, -2,  1,  0],
+                    [ 0,  0,  0,  0,  0],
+                    [ 0,  0,  0,  0,  0]],
+
+                    [[ 0,  0,  0,  0,  0],
+                    [ 0,  1,  0,  0,  0],
+                    [ 0,  0, -2,  0,  0],
+                    [ 0,  0,  0,  1,  0],
+                    [ 0,  0,  0,  0,  0]],
+
+                    [[ 0,  0,  0,  0,  0],
+                    [ 0,  0,  0,  1,  0],
+                    [ 0,  0, -2,  0,  0],
+                    [ 0,  1,  0,  0,  0],
+                    [ 0,  0,  0,  0,  0]]])
     
     img = cv2.filter2D(src=src_copy, kernel=f3[0], ddepth=-1)
     for filter in f3[1:]:
@@ -82,18 +193,42 @@ def apply_filter_c(src:np.ndarray):
 
 def apply_filter_d(src:np.ndarray):
     src_copy=np.copy(src)
-    base_filter = [[ 0,  0,  0,  0,  0],
+    # base_filter = [[ 0,  0,  0,  0,  0],
+    #                 [ 0, -1,  2, -1,  0],
+    #                 [ 0,  2, -4,  2,  0],
+    #                 [ 0,  0,  0,  0,  0],
+    #                 [ 0,  0,  0,  0,  0]]
+    # f4 = np.asarray([
+    #     base_filter,
+    #     rotate(input=base_filter,angle=90,reshape=False),
+    #     rotate(input=base_filter,angle=180,reshape=False),
+    #     rotate(input=base_filter,angle=-90,reshape=False)
+    # ])
+    
+    f4 = np.array([[[ 0,  0,  0,  0,  0],
                     [ 0, -1,  2, -1,  0],
                     [ 0,  2, -4,  2,  0],
                     [ 0,  0,  0,  0,  0],
-                    [ 0,  0,  0,  0,  0]]
-    f4 = np.asarray([
-        base_filter,
-        rotate(input=base_filter,angle=90,reshape=False),
-        rotate(input=base_filter,angle=180,reshape=False),
-        rotate(input=base_filter,angle=-90,reshape=False)
-    ])
-    
+                    [ 0,  0,  0,  0,  0]],
+
+                    [[ 0,  0,  0,  0,  0],
+                    [ 0, -1,  2,  0,  0],
+                    [ 0,  2, -4,  0,  0],
+                    [ 0, -1,  2,  0,  0],
+                    [ 0,  0,  0,  0,  0]],
+
+                    [[ 0,  0,  0,  0,  0],
+                    [ 0,  0,  0,  0,  0],
+                    [ 0,  2, -4,  2,  0],
+                    [ 0, -1,  2, -1,  0],
+                    [ 0,  0,  0,  0,  0]],
+
+                    [[ 0,  0,  0,  0,  0],
+                    [ 0,  0,  2, -1,  0],
+                    [ 0,  0, -4,  2,  0],
+                    [ 0,  0,  2, -1,  0],
+                    [ 0,  0,  0,  0,  0]]])
+
     img = cv2.filter2D(src=src_copy, kernel=f4[0], ddepth=-1)
     for filter in f4[1:]:
         img = cv2.add(img,cv2.filter2D(src=src_copy, kernel=filter, ddepth=-1))
@@ -102,18 +237,41 @@ def apply_filter_d(src:np.ndarray):
 
 def apply_filter_e(src:np.ndarray):
     src_copy=np.copy(src)
-    base_filter = [[  1,   2,  -2,   2,   1],
+    # base_filter = [[  1,   2,  -2,   2,   1],
+    #                 [  2,  -6,   8,  -6,   2],
+    #                 [ -2,   8, -12,   8,  -2],
+    #                 [  0,   0,   0,   0,   0],
+    #                 [  0,   0,   0,   0,   0]]
+    
+    # f5 = np.asarray([
+    #     base_filter,
+    #     rotate(input=base_filter,angle=90,reshape=False),
+    #     rotate(input=base_filter,angle=180,reshape=False),
+    #     rotate(input=base_filter,angle=-90,reshape=False)
+    # ])
+    f5 = np.array([[[  1,   2,  -2,   2,   1],
                     [  2,  -6,   8,  -6,   2],
                     [ -2,   8, -12,   8,  -2],
                     [  0,   0,   0,   0,   0],
-                    [  0,   0,   0,   0,   0]]
-    
-    f5 = np.asarray([
-        base_filter,
-        rotate(input=base_filter,angle=90,reshape=False),
-        rotate(input=base_filter,angle=180,reshape=False),
-        rotate(input=base_filter,angle=-90,reshape=False)
-    ])
+                    [  0,   0,   0,   0,   0]],
+
+                [[  1,   2,  -2,   0,   0],
+                    [  2,  -6,   8,   0,   0],
+                    [ -2,   8, -12,   0,   0],
+                    [  2,  -6,   8,   0,   0],
+                    [  1,   2,  -2,   0,   0]],
+
+                [[  0,   0,   0,   0,   0],
+                    [  0,   0,   0,   0,   0],
+                    [ -2,   8, -12,   8,  -2],
+                    [  2,  -6,   8,  -6,   2],
+                    [  1,   2,  -2,   2,   1]],
+
+                [[  0,   0,  -2,   2,   1],
+                    [  0,   0,   8,  -6,   2],
+                    [  0,   0, -12,   8,  -2],
+                    [  0,   0,   8,  -6,   2],
+                    [  0,   0,  -2,   2,   1]]])
     
     img = cv2.filter2D(src=src_copy, kernel=f5[0], ddepth=-1)
     for filter in f5[1:]:
@@ -146,9 +304,5 @@ def apply_filter_g(src:np.ndarray):
 
 def apply_all_filters(src:np.ndarray):
     src_copy = np.copy(src)
-    # if(gray_scale==False):
-    #     return (apply_filter_a(src_copy) + apply_filter_b(src_copy) + apply_filter_c(src_copy) + \
-    #             apply_filter_d(src_copy) + apply_filter_e(src_copy) + apply_filter_f(src_copy))//8
-    # else:
     return np.array(cv2.cvtColor((apply_filter_a(src_copy) + apply_filter_b(src_copy) + apply_filter_c(src_copy) + \
             apply_filter_d(src_copy) + apply_filter_e(src_copy) + apply_filter_f(src_copy)), cv2.COLOR_RGB2GRAY)//8).astype(np.int32)
