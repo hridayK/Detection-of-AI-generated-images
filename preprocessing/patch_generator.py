@@ -14,6 +14,8 @@ def img_to_patches(input_path:str) -> tuple:
     - input_path: Accepts input path of the image
     """
     img = PIL.Image.open(fp=input_path)
+    if(input_path[-3:]!='jpg' or input_path[-4:]!='jpeg'):
+        img = img.convert('RGB')
     if(img.size!=(256,256)):
         img = img.resize(size=(256,256))
     patch_size = 32
