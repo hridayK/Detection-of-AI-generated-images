@@ -305,4 +305,4 @@ def apply_filter_g(src:np.ndarray):
 def apply_all_filters(src:np.ndarray):
     src_copy = np.copy(src)
     return np.array(cv2.cvtColor((apply_filter_a(src_copy) + apply_filter_b(src_copy) + apply_filter_c(src_copy) + \
-            apply_filter_d(src_copy) + apply_filter_e(src_copy) + apply_filter_f(src_copy)), cv2.COLOR_RGB2GRAY)//8).astype(np.int32)
+            apply_filter_d(src_copy) + apply_filter_e(src_copy) + apply_filter_f(src_copy)), cv2.COLOR_RGB2GRAY)//8).astype(np.float64)

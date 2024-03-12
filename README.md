@@ -24,8 +24,7 @@ An attempt to detect AI generated images in a generalized manner.
 
 **Update: 20/02/2024**
 - Implement data pipeline.
-- Trained for till: ```loss: 0.1729 - binary_accuracy: 0.924```.
-- saved model as ```classifier.h5```.
+- Trained up till: ```loss: 0.1729 - binary_accuracy: 0.924```.
 
 **Update: 21/02/2024**
 - implement testing notebook.
@@ -33,3 +32,9 @@ An attempt to detect AI generated images in a generalized manner.
 
 **Update: 04/03/2024**
 - optimize for matrix rotation while applying filters.
+
+**Update: 12/03/2024**
+- Reimplement model architecture
+- Models to be retrained
+
+
